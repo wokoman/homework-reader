@@ -37,7 +37,7 @@ def home():
 
     # Convert the DataFrame to HTML and return it
     return render_template_string(
-        "<html><body>{{ table }}</body></html>", table=df.to_html()
+        df.to_html()
     )
 
 
