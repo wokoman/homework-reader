@@ -1,10 +1,6 @@
-FROM cgr.dev/chainguard/python:latest-dev as builder
+FROM python:3.12-slim
 WORKDIR /homework_reader
-COPY requirements.txt .
-RUN pip install -r requirements.txt --user --no-cache-dir
-FROM cgr.dev/chainguard/python:latest
-WORKDIR /homework_reader
-COPY --from=builder /home/nonroot/.local/lib/python3.12/site-packages /home/nonroot/.local/lib/python3.12/site-packages
-COPY main.py .
+ADD . /homework_reader
+RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
-ENTRYPOINT [ "python", "/homework_reader/main.py" ]
+CMD ["python", "main.py"]
